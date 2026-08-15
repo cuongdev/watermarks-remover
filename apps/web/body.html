@@ -1,0 +1,119 @@
+<title>Provenance Examiner</title>
+
+<header class="masthead">
+  <div class="wrap">
+    <span class="wordmark">watermark<b>·</b>examiner</span>
+    <span class="role" data-i18n="role"></span>
+    <span class="mast-actions">
+      <button class="chrome-btn" id="lang-toggle" type="button" aria-label="Language / Ngôn ngữ">VI</button>
+      <button class="chrome-btn" id="theme-toggle" type="button" data-i18n="theme" aria-label="Light / dark">Theme</button>
+    </span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="lede">
+    <h1 data-i18n-html="headline"></h1>
+    <p data-i18n="lede"></p>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Mode">
+    <button class="tab is-on" data-tab="text" role="tab" aria-selected="true" data-i18n="tabText"></button>
+    <button class="tab" data-tab="file" role="tab" aria-selected="false" data-i18n="tabFile"></button>
+  </nav>
+
+  <!-- TEXT -->
+  <section data-panel="text" role="tabpanel">
+    <div class="surface">
+      <textarea id="specimen" spellcheck="false" data-i18n-ph="placeholder"></textarea>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn" id="run-text" data-i18n="run"></button>
+      <button class="btn--ghost btn" id="load-specimen" type="button" data-i18n="loadSpec"></button>
+      <button class="btn--ghost btn" id="clear-text" type="button" data-i18n="clear"></button>
+      <span class="spacer"></span>
+      <label class="opt"><input type="checkbox" id="opt-aggressive"> <span data-i18n="optAggr"></span></label>
+      <label class="opt"><input type="checkbox" id="opt-paranoid"> <span data-i18n="optParanoid"></span></label>
+    </div>
+
+    <div class="results" id="text-results" hidden>
+      <div class="verdict">
+        <div class="verdict-head">
+          <span class="kicker" id="verdict-kicker"></span>
+          <span class="count" id="verdict-count"></span>
+        </div>
+        <p class="verdict-line" id="verdict-line"></p>
+        <p class="verdict-note" id="verdict-note"></p>
+      </div>
+
+      <div class="section-label" data-i18n="labExhibit"></div>
+      <div class="exhibit" id="exhibit"></div>
+
+      <div class="section-label" data-i18n="labLedger"></div>
+      <div id="ledger-wrap"></div>
+
+      <div class="remedy" id="remedy" hidden>
+        <div class="remedy-head">
+          <span class="section-label" data-i18n="labCleaned"></span>
+          <span class="hint" id="remedy-stats"></span>
+          <button class="btn--ghost btn" id="copy-clean" type="button" data-i18n="copy"></button>
+        </div>
+        <div class="surface">
+          <textarea id="cleaned" spellcheck="false" readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILE -->
+  <section data-panel="file" role="tabpanel" hidden>
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="File">
+      <div class="dz-title" data-i18n="dzTitle"></div>
+      <div class="dz-sub" data-i18n="dzSub"></div>
+      <input type="file" id="file-input" hidden>
+    </div>
+
+    <div class="results" id="file-results" hidden>
+      <div class="verdict">
+        <div class="verdict-head">
+          <span class="kicker" id="file-kicker"></span>
+          <span class="count" id="file-meta"></span>
+        </div>
+        <p class="verdict-line" id="file-line"></p>
+        <p class="manifest" id="file-manifest" hidden></p>
+      </div>
+
+      <div class="section-label" data-i18n="labLedger"></div>
+      <div id="file-ledger-wrap"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p data-i18n-html="footProves"></p>
+    <p data-i18n-html="footNot"></p>
+    <p data-i18n-html="footRuns"></p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var KEY = "examiner-theme";
+    var root = document.documentElement;
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved) root.setAttribute("data-theme", saved);
+    } catch (e) {}
+    document.addEventListener("click", function (e) {
+      if (!(e.target instanceof Element)) return;
+      if (e.target.id !== "theme-toggle") return;
+      var cur = root.getAttribute("data-theme");
+      var dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var next = dark ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+    });
+  })();
+</script>

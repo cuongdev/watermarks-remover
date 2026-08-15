@@ -8,3 +8,8 @@ __pycache__/
 *.png.bak
 *.jpg.bak
 posts.md
+
+# JS libs / web app
+node_modules/
+dist/
+.codegraph/

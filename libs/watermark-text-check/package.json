@@ -1,0 +1,39 @@
+{
+  "name": "watermark-text-check",
+  "version": "0.1.0",
+  "description": "Isomorphic TypeScript port of the watermarks-remover Layer A text checks: verify an input is text and detect invisible Unicode watermark carriers. For hygiene on content you own.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist/src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node --test \"dist/tests/*.test.js\""
+  },
+  "peerDependencies": {
+    "pdf-lib": "^1.17.1"
+  },
+  "peerDependenciesMeta": {
+    "pdf-lib": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "typescript": "^5.5.0"
+  }
+}

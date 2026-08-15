@@ -1,0 +1,15 @@
+{
+  "name": "watermark-examiner-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Browser front end for watermark-text-check: reveal invisible watermarks, C2PA manifests, and AI metadata, with evidence.",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node build.mjs && node --eval \"import('node:http').then(({default:h})=>import('node:fs').then(({default:f})=>h.createServer((q,s)=>{s.setHeader('content-type','text/html');s.end(f.readFileSync('dist/index.html'))}).listen(4321,()=>console.log('http://localhost:4321'))))\""
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "typescript": "^5.5.0"
+  }
+}
